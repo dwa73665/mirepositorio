@@ -1,1 +1,3 @@
-documento de prueba en GIT
+creo documento de prueba en GIT
+el documento es untracked y hago un "git add"
+modifico el texto para luego hacer un "commit"
