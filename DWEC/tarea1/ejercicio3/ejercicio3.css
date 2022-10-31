@@ -1,0 +1,45 @@
+h1 {
+    text-align: center;
+    color: darkred;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border: 1px solid black;
+
+}
+
+body{
+    background-color: darkgray;
+}
+
+table, td, th{
+    border: 1px solid black;
+    text-align: center;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+.flexcontainer{
+    
+}
+
+#jugadores{
+    border: 1px solid black;
+    margin: 50px 50px;
+
+}
+
+#informacion {
+    border: 1px solid black;
+}
+
+#cancelado {
+    color: red;
+    text-align: center;
+}
+
+footer{
+    margin-top: 100px;
+    text-align: right;
+}
