@@ -4,7 +4,7 @@
  * @description
  */
 
-function numeroEscalones() {
+ function numeroEscalones() {
   escalones = window.prompt("Introduzca el número de escalones");
   while (isNaN(escalones) || escalones == "") {
     if (escalones == "") {
@@ -65,34 +65,47 @@ function alturaEscalera() {
   }
 }
 
-function pintarEscalera1(escalones, ancho, altura) {
-  const asterisco = "*";
-  const espacio = "&nbps;&nbps;";
+function lineaHorizontal(tabulado) {
   let linea = "";
-  let vacio = "&nbsp;&nbsp;";
-
-  //creo linea horizontal de asteriscos
-  for (let j = 0; j < ancho; j++) {
+  for (let i = 0; i < ancho; i++) {
     linea = linea + asterisco;
   }
-  //creo espacio blanco
-  for (let i = 0; i < ancho - 1; i++) {
-    vacio = vacio + espacio;
+  document.write("<p>" + tabulado + linea + "</p>");
+}
+
+function lineaVertical(tabulado) {
+  let anchovacio = "";
+  for (let l = 1; l < ancho; l++) {
+    anchovacio = anchovacio + espacio;
   }
-  //bucle escalones
-  for (let k = 0; k < escalones; k++) {
-    document.write("<p>" + linea + "</p>");
-      //linea vertical
-      for (let l = 0; l < altura; l++) {
-        document.write("<p>" + vacio + asterisco + "</p>");
-      }
+  for (let j = 1; j < altura; j++) {
+    document.write("<p>" + tabulado + anchovacio + asterisco + "</p>");
   }
 }
 
+function escalado(i) {
+  let sangrado = ancho * i;
+  for (let z = 1; z < sangrado; z++) {
+    tabulado = tabulado + espacio;
+  }
+}
+
+function pintarEscalera1(escalones) {
+  for (let k = 0; k < escalones; k++) {
+    escalado(k);
+    lineaHorizontal(tabulado);
+    lineaVertical(tabulado);
+    tabulado = "";
+  }
+}
+
+const asterisco = "*";
+const espacio = "&nbsp;&nbsp;";
 let escalones;
 let ancho;
 let altura;
-cancelar = false;
+let tabulado = "";
+let cancelar = false;
 
 numeroEscalones();
 if (cancelar == false) {
@@ -103,7 +116,6 @@ if (cancelar == false) {
       alturaEscalera();
       if (cancelar == false) {
         pintarEscalera1(escalones, ancho, altura);
-        pintarEscalera2();
       }
     }
   }
