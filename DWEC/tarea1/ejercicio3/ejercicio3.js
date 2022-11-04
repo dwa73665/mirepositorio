@@ -4,7 +4,7 @@
  * @description Juego de Cartas
  */
 
-function validarNombre(dato) {
+ function validarNombre(dato) {
   while (dato == "") {
     dato = window.prompt(
       "No has introducido nada.\nIntroduce un nombre o cancela para salir"
@@ -13,6 +13,7 @@ function validarNombre(dato) {
   if (dato == null) {
     cancelar_juego = true;
   }
+  return dato;
 }
 
 function validarValorCarta(dato) {
@@ -36,6 +37,7 @@ function validarValorCarta(dato) {
           "\nElija una carta entre:  as  ,  2  ,  3  ,  4  ,  5  ,  6  ,  7  ,  s  ,  c  ,  r"
       );
     }
+    return dato;
   }
 }
 
@@ -49,6 +51,7 @@ function validarPalo(dato) {
         "No has intruducido un palo válido.\nElije: \noros \ncopas \nespadas \nbastos"
       );
     }
+    return dato;
   }
 }
 
@@ -58,7 +61,7 @@ function pideNombre(numero_de_jugador) {
       numero_de_jugador +
       " o cancela para salir"
   );
-  validarNombre(nombre);
+  nombre = validarNombre(nombre);
   return nombre;
 }
 
@@ -95,12 +98,13 @@ function eligeCarta(i) {
       "\n" +
       "\nElija una carta entre:  as  ,  2  ,  3  ,  4  ,  5  ,  6  ,  7  ,  s  ,  c  ,  r"
   );
-  validarValorCarta(valorCarta);
+
+  valorCarta = validarValorCarta(valorCarta);
   if (cancelar_juego == false) {
     let palo = window.prompt(
       "\nElija el palo de su carta entre: \noros \ncopas \nespadas \nbastos"
     );
-    validarPalo(palo);
+    palo = validarPalo(palo);
     if (cancelar_juego == false) {
       carta_elegida_jugador_n[0] = valorCarta;
       carta_elegida_jugador_n[1] = palo;
@@ -179,51 +183,45 @@ function borrarCartas() {
     }
   }
 }
+
 function evaluarResultado() {
-  puntos_sobre10 = puntuacion_jugadores*2;
-  switch (puntos_sobre10) {
-    case puntos_sobre10 <= 3:
-      window.alert(
-        "El resultado final es " +
-          puntos_sobre10 +
-          " sobre 10, necesitáis mejorar"
-      );
-      break;
-    case puntos_sobre10 >= 4 && puntos_sobre10 <= 6:
-      window.alert(
-        "El resultado final es " +
-          puntos_sobre10 +
-          " sobre 10, vais por buen camino"
-      );
-      break;
-    case puntos_sobre10 >= 7 && puntos_sobre10 <= 9:
-      window.alert(
-        "El resultado final es " +
-          puntos_sobre10 +
-          " sobre 10, estáis en la misma sintonía"
-      );
-      break;
-    case puntos_sobre10 == 10:
-      window.alert(
-        "El resultado final es " + puntos_sobre10 + " sobre 10, lo bordáis."
-      );
-      break;
-    default:
-      window.alert("Error evaluando resultado");
-      break;
+  puntos_sobre10 = puntuacion_jugadores * 2;
+  if (puntos_sobre10 <= 3) {
+    mensajeFinal =
+      "El resultado final es " +
+      puntos_sobre10 +
+      " sobre 10, necesitáis mejorar";
+    window.alert(mensajeFinal);
+  }
+  if (puntos_sobre10 >= 4 && puntos_sobre10 <= 6) {
+    mensajeFinal =
+      "El resultado final es " +
+      puntos_sobre10 +
+      " sobre 10, vais por buen camino";
+    window.alert(mensajeFinal);
+  }
+  if (puntos_sobre10 >= 7 && puntos_sobre10 <= 9) {
+    mensajeFinal =
+      "El resultado final es " +
+      puntos_sobre10 +
+      " sobre 10, estáis en la misma sintonía";
+    window.alert(mensajeFinal);
+  }
+  if (puntos_sobre10 == 10) {
+    mensajeFinal =
+      "El resultado final es " + puntos_sobre10 + " sobre 10, lo bordáis.";
+    window.alert(mensajeFinal);
   }
 }
 
 function pasarInfoHTML() {
-  let mensaje = evaluarResultado();
   document.getElementById("jugador1").innerHTML = jugador1;
   document.getElementById("jugador2").innerHTML = jugador2;
   document.getElementById("numeroparejas").innerHTML = puntuacion_jugadores;
   document.getElementById("puntuacion").innerHTML = puntos_sobre10;
-  document.getElementById("mensaje").innerHTML = mensaje;
+  document.getElementById("mensaje").innerHTML = mensajeFinal;
 }
 
-//****************************        CODIGO PRINCIPAL       *************************************/
 let oros = ["as", "2", "3", "4", "5", "6", "7", "s", "c", "r"];
 let copas = ["as", "2", "3", "4", "5", "6", "7", "s", "c", "r"];
 let espadas = ["as", "2", "3", "4", "5", "6", "7", "s", "c", "r"];
@@ -231,11 +229,12 @@ let bastos = ["as", "2", "3", "4", "5", "6", "7", "s", "c", "r"];
 let numero_jugadores = 2;
 let jugador1, jugador2;
 let cancelar_juego = false;
-let numero_turnos = 2;
+let numero_turnos = 4;
 let contador_turnos = 1;
 let puntuacion_jugadores = 0;
 let puntos_sobre10 = 0;
 let cartas_elegidas_todos_jugadores = [];
+let mensajeFinal = "";
 
 jugador1 = pideNombre(1);
 if (cancelar_juego == false) {
