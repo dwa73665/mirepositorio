@@ -4,7 +4,7 @@
  * @description Juego de Cartas
  */
 
- function validarNombre(dato) {
+function validarNombre(dato) {
   while (dato == "") {
     dato = window.prompt(
       "No has introducido nada.\nIntroduce un nombre o cancela para salir"
@@ -36,6 +36,80 @@ function validarValorCarta(dato) {
           "\n" +
           "\nElija una carta entre:  as  ,  2  ,  3  ,  4  ,  5  ,  6  ,  7  ,  s  ,  c  ,  r"
       );
+    }
+    switch (tipo) {
+      case "oros":
+        while (oros.indexOf(dato) == -1) {
+          dato = window.prompt(
+            "Has elegio una carta NO DISPONIBLE. Las cartas disponibles son:" +
+              "\n" +
+              "\n oros:        " +
+              oros +
+              "\n copas:      " +
+              copas +
+              "\n espadas:  " +
+              espadas +
+              "\n bastos:     " +
+              bastos +
+              "\n" +
+              "\nElija una carta entre:  as  ,  2  ,  3  ,  4  ,  5  ,  6  ,  7  ,  s  ,  c  ,  r"
+          );
+        }
+        break;
+      case "copas":
+        while (copas.indexOf(dato) == -1) {
+          dato = window.prompt(
+            "Has elegio una carta NO DISPONIBLE. Las cartas disponibles son:" +
+              "\n" +
+              "\n oros:        " +
+              oros +
+              "\n copas:      " +
+              copas +
+              "\n espadas:  " +
+              espadas +
+              "\n bastos:     " +
+              bastos +
+              "\n" +
+              "\nElija una carta entre:  as  ,  2  ,  3  ,  4  ,  5  ,  6  ,  7  ,  s  ,  c  ,  r"
+          );
+        }
+        break;
+      case "espadas":
+        while (espadas.indexOf(dato) == -1) {
+          dato = window.prompt(
+            "Has elegio una carta NO DISPONIBLE. Las cartas disponibles son:" +
+              "\n" +
+              "\n oros:        " +
+              oros +
+              "\n copas:      " +
+              copas +
+              "\n espadas:  " +
+              espadas +
+              "\n bastos:     " +
+              bastos +
+              "\n" +
+              "\nElija una carta entre:  as  ,  2  ,  3  ,  4  ,  5  ,  6  ,  7  ,  s  ,  c  ,  r"
+          );
+        }
+        break;
+      case "bastos":
+        while (bastos.indexOf(dato) == -1) {
+          dato = window.prompt(
+            "Has elegio una carta NO DISPONIBLE. Las cartas disponibles son:" +
+              "\n" +
+              "\n oros:        " +
+              oros +
+              "\n copas:      " +
+              copas +
+              "\n espadas:  " +
+              espadas +
+              "\n bastos:     " +
+              bastos +
+              "\n" +
+              "\nElija una carta entre:  as  ,  2  ,  3  ,  4  ,  5  ,  6  ,  7  ,  s  ,  c  ,  r"
+          );
+        }
+        break;
     }
     return dato;
   }
@@ -142,15 +216,15 @@ function borrarCartas() {
       break;
     case "copas":
       valor_a_borrar = copas.indexOf(cartas_elegidas_todos_jugadores[0][0]);
-      copas.splice(valor_a_borrar,1);
+      copas.splice(valor_a_borrar, 1);
       break;
     case "espadas":
       valor_a_borrar = espadas.indexOf(cartas_elegidas_todos_jugadores[0][0]);
-      espadas.splice(valor_a_borrar,1);
+      espadas.splice(valor_a_borrar, 1);
       break;
     case "bastos":
       valor_a_borrar = bastos.indexOf(cartas_elegidas_todos_jugadores[0][0]);
-      bastos.splice(valor_a_borrar,1);
+      bastos.splice(valor_a_borrar, 1);
       break;
     default:
       window.alert("Error: No se han borrado cartas");
