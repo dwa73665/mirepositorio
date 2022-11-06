@@ -138,19 +138,19 @@ function borrarCartas() {
   switch (cartas_elegidas_todos_jugadores[0][1]) {
     case "oros":
       valor_a_borrar = oros.indexOf(cartas_elegidas_todos_jugadores[0][0]);
-      oros[valor_a_borrar] = "_";
+      oros.splice(valor_a_borrar, 1);
       break;
     case "copas":
       valor_a_borrar = copas.indexOf(cartas_elegidas_todos_jugadores[0][0]);
-      copas[valor_a_borrar] = "_";
+      copas.splice(valor_a_borrar,1);
       break;
     case "espadas":
       valor_a_borrar = espadas.indexOf(cartas_elegidas_todos_jugadores[0][0]);
-      espadas[valor_a_borrar] = "_";
+      espadas.splice(valor_a_borrar,1);
       break;
     case "bastos":
       valor_a_borrar = bastos.indexOf(cartas_elegidas_todos_jugadores[0][0]);
-      bastos[valor_a_borrar] = "_";
+      bastos.splice(valor_a_borrar,1);
       break;
     default:
       window.alert("Error: No se han borrado cartas");
@@ -163,19 +163,19 @@ function borrarCartas() {
     switch (cartas_elegidas_todos_jugadores[1][1]) {
       case "oros":
         valor_a_borrar = oros.indexOf(cartas_elegidas_todos_jugadores[1][0]);
-        oros[valor_a_borrar] = "_";
+        oros.splice(valor_a_borrar, 1);
         break;
       case "copas":
         valor_a_borrar = copas.indexOf(cartas_elegidas_todos_jugadores[1][0]);
-        copas[valor_a_borrar] = "_";
+        copas.splice(valor_a_borrar, 1);
         break;
       case "espadas":
         valor_a_borrar = espadas.indexOf(cartas_elegidas_todos_jugadores[1][0]);
-        espadas[valor_a_borrar] = "_";
+        espadas.splice(valor_a_borrar, 1);
         break;
       case "bastos":
         valor_a_borrar = bastos.indexOf(cartas_elegidas_todos_jugadores[1][0]);
-        bastos[valor_a_borrar] = "_";
+        bastos.splice(valor_a_borrar, 1);
         break;
       default:
         window.alert("Error: No se han borrado cartas");
