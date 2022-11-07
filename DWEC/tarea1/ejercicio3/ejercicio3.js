@@ -1,9 +1,28 @@
 /**
  * @author  Adrian Pomar Maseda
  * @version 1.0
- * @description Juego de Cartas
+ * @description Ejercicio 3:Juego de Cartas, de la segunda Tarea evaluable de DWEC.
+ *
+ * El juego de cartas se desarrolla con la baraja española y participan dos jugadores.
+ *
+ * En cada turno eligen una carta de las que haya disponibles, sin saber lo que elige el compañero.
+ *
+ * Hasta finalizar el turno no se retirarán las cartas elegidas de las disponibles, ya que en el mismo turno,
+ * sobre todo el primero, si se elimina una carta se le facilita informacion al segundo jugador.
+ *
+ * Cuando hagan pareja se añadirá un punto a la puntuación global.
+ * Son cinco turnos.
+ *
+ * Al final de la partida la puntuacion sobre 5 se transformará a puntuacion sobre 10 y se mostraran
+ * mensajes segun la puntucion obtenida
  */
 
+/**
+ * Controla que el usuario introduzca un nombre válido (no vacio) y hace funcional el boton
+ * cancelar del prompt.
+ * @param {String} dato - String introducido por el usuario guardado en la variable jugador1.
+ * @returns {String} dato - String validado segun los criterios para almecenarlo en jugador1.
+ * */
 function validarNombre(dato) {
   while (dato == "") {
     dato = window.prompt(
@@ -16,6 +35,13 @@ function validarNombre(dato) {
   return dato;
 }
 
+/**
+ * Comprueba validez en primer lugar de el valor de la carta, introducido en el prompt por el usuario, esté entre los 10 tipos posibles y comprueba además
+ * que la carta este disponible en el mazo en el turno actual. El botón cancelar del prompt es funcional.
+ * @param {String} dato - Para evaluar el valor de la carta como valido y saber si esta disponible.
+ * @param {String} tipo - Para identificar el palo donde evaluar la disponibilidad de la carta.
+ * @returns {String} dato - devuelve un valor de carta válido.
+ * */
 function validarValorCarta(dato) {
   let valoresValidos = ["as", "2", "3", "4", "5", "6", "7", "s", "c", "r"];
   if (dato == null) {
@@ -115,6 +141,11 @@ function validarValorCarta(dato) {
   }
 }
 
+/**
+ * Comprueba validez del palo introducido por el usuario entre los 4 posibles. Hace funcional la opción cancelar del prompt.
+ * @param {String} dato - Valor de palo introducido.
+ * @returns {String} dato - de palo válido.
+ */
 function validarPalo(dato) {
   let valoresValidos = ["oros", "copas", "espadas", "bastos"];
   if (dato == null) {
@@ -129,6 +160,11 @@ function validarPalo(dato) {
   }
 }
 
+/**
+ * Solicita por pantalla un nombre de jugador del que se comprobará su validez y se puede cancelar juego.
+ * @param {String} numero_de_jugador - número jugador al que se refiere.
+ * @returns {String} nombre válido para el juegador que se almacenará en una variable.
+ */
 function pideNombre(numero_de_jugador) {
   let nombre = window.prompt(
     "Introduce nombre del JUGADOR " +
@@ -139,6 +175,9 @@ function pideNombre(numero_de_jugador) {
   return nombre;
 }
 
+/**
+ * Compara que el jugador 2 no se llame igual que el jugador 1, si es así, solicita un nuevo nombre para el juegador 2.
+ */
 function compararNombres() {
   while (jugador1 == jugador2) {
     window.alert("Los nombres coindicen.\nVuelva a introducirlos.");
@@ -147,10 +186,19 @@ function compararNombres() {
   }
 }
 
+/**
+ * Mensaje a mostrar en la distintas fases del programa cuando se cancela en un prompt.
+ */
 function mensajeCancelar() {
   document.getElementById("cancelado").innerHTML = "Juego cancelado";
 }
 
+/**
+ * Solicita por pantalla al jugador correspondiente, el palo de la baraja y el valor de la carta. Comprobará la validez de los datos llamando
+ * a las funciones de validación. Finalmente los guardará en un array.
+ * @param {Number} i Identificador del jugador al que se refiere
+ * @returns {Array} carta_elegida_jugador_n  Almacena los valores del valor de la carta y el palo en un array.
+ */
 function eligeCarta(i) {
   let carta_elegida_jugador_n = [];
   let index = i + 1;
@@ -187,6 +235,12 @@ function eligeCarta(i) {
   }
 }
 
+/**
+ * Comprueba si las cartas elegidas por los jugadores (almacenadas en un array) hacen pareja, para ello evalua la igualdad del valor de la carta, el palo
+ * en este caso es irrelevante para la puntuación. Si son pareja la puntucion de la partida se incrementa en 1.
+ * @param {Array} cartaJugador1
+ * @param {Array} cartaJugador2
+ */
 function jugadaEnCurso(cartaJugador1, cartaJugador2) {
   if (cartaJugador1[0] == cartaJugador2[0]) {
     puntuacion_jugadores += 1;
@@ -206,6 +260,9 @@ function jugadaEnCurso(cartaJugador1, cartaJugador2) {
   }
 }
 
+/**
+ * Borra las cartas elegidas por los jugadores de los cuatro Arrays que almacenan las 10 cartas de cada palo.
+ */
 function borrarCartas() {
   let valor_a_borrar = 0;
   //borrar carta jugador 1
@@ -258,6 +315,11 @@ function borrarCartas() {
   }
 }
 
+/**
+ * De la puntucion obtenida en los 5 turnos, tratandola como fraccion con denominador 5 y numerador la puntucion, obtiene la fraccion equivalente
+ * con denominador 10. Obtiene una puntuacion sobre 10 puntos, y se asocia un mensaje (segun los intervalos de puntuacion establecidos) que se
+ * muestra por pantalla.
+ */
 function evaluarResultado() {
   puntos_sobre10 = puntuacion_jugadores * 2;
   if (puntos_sobre10 <= 3) {
@@ -288,6 +350,9 @@ function evaluarResultado() {
   }
 }
 
+/**
+ * Modifica el contenido del documento HTML con la informacion almacenada de la partida.
+ */
 function pasarInfoHTML() {
   document.getElementById("jugador1").innerHTML = jugador1;
   document.getElementById("jugador2").innerHTML = jugador2;
