@@ -368,7 +368,7 @@ let bastos = ["as", "2", "3", "4", "5", "6", "7", "s", "c", "r"];
 let numero_jugadores = 2;
 let jugador1, jugador2;
 let cancelar_juego = false;
-let numero_turnos = 4;
+let numero_turnos = 5;
 let contador_turnos = 1;
 let puntuacion_jugadores = 0;
 let puntos_sobre10 = 0;
