@@ -1,5 +1,5 @@
 /**
- * @author Adrian Pomar Maseda
+ * @author Adrian Pomar Maseda dwa73655@educastur
  * @version version 1.0
  * @description El programa solicitará determinada información por pantalla. Esta informacion será añadida a la pagina web como indica el enunciado. Se tratarán como objetos Number y String.
  */

@@ -1,6 +1,6 @@
 /**
- * @author
- * @version
+ * @author Adrian Pomar Maseda dwa73655@educastur
+ * @version 1.0
  * @description Una empresa guarda la informacion de productos en un array con la siguiente estructura :
  *      [codigoProducto, descripcion, precio,
  *       codigoProducto, descripcion, precio ....]
