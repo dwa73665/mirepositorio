@@ -74,9 +74,9 @@ function generarCadenaProductos() {
     "La lista de productos ordenada de mayor a menor es:<br>";
   for (var i = 0; i < matriz.length; i++) {
     cadenaProductos +=
-      `${i + 1}. El '` +
+      `${i + 1}. "` +
       matriz[i][1] +
-      "' con un precio de " +
+      '" con un precio de ' +
       matriz[i][2] +
       "€" +
       "<br>";
@@ -117,48 +117,96 @@ function modificarCadena(cadena) {
 }
 
 /**
- * Muestra los productos disponibles al usuario en un prompt donde puede insertar el que desea o cancelar. A continuación se pregunta el número de unidades que desa para ese artículo, tambien puede cancerlar.
+ * Muestra los productos disponibles al usuario en un prompt donde puede insertar el que desea o cancelar. A continuación se pregunta el número de unidades que desa para ese artículo, tambien puede cancerlar si lo desea. Finalmente si ha elegido un producto y su cantidad se almacenará en el array de la Cesta.
  */
-function mostrarProductos() {
+function pedidoUsuario() {
   var articulo = prompt(
     cadenaAnuncio +
       "\n" +
-      "Introduzca el nombre del producto (¡CON COMILLAS SIMPLES!) que desea comprar o cancelar para salir."
+      "Introduzca el nombre del producto (¡¡SIN COMILLAS!!) que desea comprar o cancelar para salir."
   );
   if (articulo != null) {
-    for (var i = 0; i < matriz.length; i++) {
-      if (articulo == matriz[i][1]) {
-        var unidades = prompt(
-          "Introduzca el numero de unidades que desea comprar"
-        );
-        if (unidades != null) {
-          var productoCesta = new Producto(matriz[i][1], unidades);
-          cesta.push(productoCesta);
-          mostrarProductos();
+    if (productos.includes(articulo) == true) {
+      window.alert("El producto " + articulo + " se ha añadido a la cesta.");
+      var unidades = prompt("Introduzca las unidades que desea del producto");
+      if (unidades != null) {
+        unidades = parseInt(unidades);
+        if (unidades > 0) {
+          cesta.push([articulo, unidades]);
+          var x = window.confirm("¿Desea seguir comprando?");
+          if (x == true) {
+            pedidoUsuario();
+          } else {
+            window.alert("Ha finalizado su compra");
+          }
+        } else {
+          window.alert("No se han añadido unidades al producto.");
+          pedidoUsuario();
         }
       } else {
-        window.alert("El producto introducido no existe");
-        mostrarProductos();
+        window.alert("Ha cancelado la compra");
+      }
+    } else {
+      window.alert("El producto " + articulo + " no se encuentra disponible.");
+      pedidoUsuario();
+    }
+  } else {
+    alert("Ha cancelado la compra");
+  }
+}
+
+/**
+ * Genera un string con la informacion de los productos que se han añadido a la cesta.
+ */
+function generarCadenaCesta() {
+  var cadenaCesta = "La cesta contiene:<br>";
+  for (var i = 0; i < cesta.length; i++) {
+    cadenaCesta +=
+      cesta[i][1] + " unidades del producto " + cesta[i][0] + "<br>";
+  }
+  return cadenaCesta;
+}
+
+/**
+ * Calcula el importe de la cesta.
+ * @returns {Number} importe - importe total de la cesta
+ */
+function calcularImporte() {
+  var importe = 0;
+  for (var i = 0; i < cesta.length; i++) {
+    for (var j = 0; j < matriz.length; j++) {
+      if (cesta[i][0] == matriz[j][1]) {
+        importe += cesta[i][1] * matriz[j][2];
       }
     }
   }
+  return importe;
+}
+
+/**
+ * Muestra la cesta y el importe en el HTML.
+ */
+function insertarCestaHTML() {
+  document.getElementById("cesta").innerHTML = cadenaCesta;
+  document.getElementById("importe").innerHTML =
+    "El importe total es " + importe + "€";
 }
 
 let productos = [
   3,
-  "producto3",
+  "manzana",
   3,
   2,
-  "producto2",
+  "pera",
   2,
   1,
-  "producto1",
+  "fresa",
   1,
   4,
-  "producto4",
+  "tomate",
   4,
   5,
-  "producto5",
+  "platano",
   5,
 ];
 let num_productos = 0;
@@ -168,6 +216,8 @@ let matriz;
 let cadenaProductos = "";
 let cadenaAnuncio = "";
 let cesta = new Array();
+let cadenaCesta = "";
+let importe = 0;
 
 num_productos = calcularNumProductos(productos);
 matriz = new Array();
@@ -177,4 +227,7 @@ ordenarMatriz("mayor");
 cadenaProductos = generarCadenaProductos();
 insertarProductosHTML();
 cadenaAnuncio = modificarCadena(cadenaProductos);
-mostrarProductos();
+pedidoUsuario();
+cadenaCesta = generarCadenaCesta();
+importe = calcularImporte();
+insertarCestaHTML();
